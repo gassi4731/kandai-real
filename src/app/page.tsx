@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import Image from "next/image";
 import { Camera, CameraType } from "react-camera-pro";
 import { ref, uploadBytes } from "firebase/storage";
@@ -84,7 +84,7 @@ export default function Home() {
     await setDoc(doc(db, "memories", generatedULID), data);
   };
 
-  const ButtonComponent = () => {
+  const ButtonComponent = useMemo(() => {
     if (state === 0) {
       return (
         <div className="flex justify-center pt-4">
@@ -94,14 +94,14 @@ export default function Home() {
     } else {
       return (
         <div className="w-full flex justify-center mt-10">
-          <button className="flex gap-2" onClick={onClickSendButton}>
+          <button className="flex gap-2 items-center" onClick={onClickSendButton}>
             <span className="text-4xl font-bold">追加</span>
             <Image src="/yajirushi.svg" alt="Back" width={25} height={25} />
           </button>
         </div>
       );
     }
-  };
+  }, [state]);
 
   return (
     <>
@@ -138,7 +138,7 @@ export default function Home() {
           <Image src={image ?? ""} alt="" width={1200} height={1000} className="scale-x-[-1]" />
         )}
       </div>
-      <ButtonComponent />
+      {ButtonComponent}
     </>
   );
 }

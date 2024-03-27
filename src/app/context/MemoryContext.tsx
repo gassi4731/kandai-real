@@ -27,7 +27,7 @@ export const MemoryProvider = ({ children }: Props) => {
 
         snapshotMemories.push({
           id: doc.id,
-          day: Math.abs(createdAt.getDay() - 24),
+          day: createdAt.getDay(),
           time: time,
           createdAt: doc.data().createdAt,
           imageName: doc.data().imageName,
@@ -36,8 +36,6 @@ export const MemoryProvider = ({ children }: Props) => {
       });
 
       setMemories(snapshotMemories);
-
-      
     });
   }, []);
 

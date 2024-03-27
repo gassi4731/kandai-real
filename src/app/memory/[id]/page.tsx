@@ -8,6 +8,8 @@ import React, { useState, useContext, useEffect } from "react";
 import { writeBatch, doc } from "firebase/firestore"; 
 import { db } from "@/app/firebase";
 
+export const runtime = 'edge'
+
 export default function Memory({ params }: { params: { id: string } }) {
   const { memories } = useContext(MemoryContext);
   const [memory, setMemory] = useState<Memory | undefined>(undefined);
